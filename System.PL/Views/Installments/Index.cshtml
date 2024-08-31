@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+@if (Model.Count() > 0)
+{
+    <div class="container">
+        <table class="table table-striped table-hover text-center" style="padding-left: 150px;">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Phone
+
+                    </th>
+
+                    <th>
+                        Total Required
+                    </th>
+
+                    @* <th>Times of Coming</th> *@
+
+                    <th>
+                        Detials
+
+                    </th>
+
+
+
+                    <th>
+                        Take One
+
+                    </th>
+
+
+
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td> @student.Name</td>
+                        <td> @student.Phone</td>
+                        <td> @student.TotalAmount</td>
+
+
+                        @* <td>@student.Attendances.Count(a => a.IsComed)</td> *@
+
+
+                        <td>
+                            <a class="btn btn-warning" asp-action="DetailsInstallments" asp-route-id="@student.Id"> Details </a>
+                        </td>
+
+
+
+                        <td>
+                            <a class="btn btn-info" asp-action="NewInstallment" asp-route-id="@student.Id"> New Installment </a>
+                        </td>
+
+
+
+
+
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <h5> No Installemnts Taken</h5>
+    </div>
+}

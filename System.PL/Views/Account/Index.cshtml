@@ -1,0 +1,62 @@
+﻿@model IEnumerable<UserViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<a class="btn btn-info text-white" asp-action="SignUp"> Create New Admin</a>
+
+
+@if (Model.Count() > 0)
+{
+    <h2 class="my-4"> Admins are :  </h2>
+
+
+    <table class="table table-striped table-hover">
+        <thead>
+        </thead>
+        <tr>
+
+
+            <th> @Html.DisplayNameFor(d => d.FirstName)</th>
+            <th> @Html.DisplayNameFor(d => d.LastName)</th>
+            <th> @Html.DisplayNameFor(d => d.Email)</th>
+          
+
+
+
+
+
+            @* <th>Delete</th> *@
+        </tr>
+        <tbody>
+            @foreach (var department in Model)
+            {
+                <tr>
+                    <td>@department.FirstName</td>
+                    <td>@department.LastName</td>
+                    <td>@department.Email</td>
+                    
+                 
+
+                @*     <td>
+                        <a class="btn btn-danger text-white" asp-action="Delete" asp-controller="Account" asp-route-id="@department.Id">Delete</a>
+
+                    </td> *@
+                   
+
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+}
+else
+{
+    <div class="mt-4 alert alert-danger">
+        <h4>There is No Admins  To Show : </h4>
+    </div>
+}
+

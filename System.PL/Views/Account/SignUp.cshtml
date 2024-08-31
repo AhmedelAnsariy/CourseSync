@@ -1,0 +1,64 @@
+﻿@model SignUpViewModel
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+
+<h3>Add New Admin : </h3>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger my-5" role="alert">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li class="text-danger">@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form asp-action="SignUp">
+
+    <input class="form-control my-3" required="" placeholder="First Name" asp-for="FName" />
+    <span asp-validation-for="FName" class="text-danger"></span>
+
+
+
+    <input class="form-control my-3" required="" placeholder="Last Name" asp-for="LName" />
+    <span asp-validation-for="LName" class="text-danger"></span>
+
+
+    <input class="form-control my-3" required="" placeholder="Email" asp-for="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+
+
+
+    <input class="form-control my-3" asp-for="Password" type="password" placeholder="Password" required="">
+    <span asp-validation-for="Password" class="text-danger"></span>
+
+
+
+    <input class="form-control my-3" asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" required="">
+    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+
+    <input type="submit" class="btn btn-success w-100"  />
+
+
+
+</form>
+
+
+@section validation {
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+
+
+
+
+

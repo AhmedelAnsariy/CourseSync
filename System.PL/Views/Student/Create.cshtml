@@ -1,0 +1,122 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "Create";
+
+
+    var groupNames = ViewBag.GroupNames as IEnumerable<GroupName>;
+    var schedules = ViewBag.Schedules as IEnumerable<Schedule>;
+}
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+
+<form asp-action="Create">
+
+
+
+
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control" placeholder="Ahmed Mahmoud" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="Phone" class="col-form-label"></label>
+        <input asp-for="Phone" class="form-control" placeholder="91020296" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="TotalAmount" class="col-form-label"></label>
+        <input asp-for="TotalAmount"  value="100" class="form-control" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Schedule.GroupName.DayName" class="col-form-label"></label>
+        <select id="dayNameSelect" class="form-control">
+            <option value="">-- Select Day --</option>
+            @foreach (var groupName in groupNames)
+            {
+                <option value="@groupName.Id">@groupName.DayName</option>
+            }
+        </select>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <label asp-for="Schedule" class="col-form-label"></label>
+        <select id="scheduleSelect" asp-for="ScheduleId" class="form-control">
+            <option value="">-- Select Schedule --</option>
+        </select>
+    </div>
+
+
+
+    <input type="submit" value="Create Student" class="btn btn-primary mt-4"   onclick="displayAlert()" />
+
+
+</form>
+
+
+
+
+
+<script>
+    document.getElementById('dayNameSelect').addEventListener('change', function () {
+        var selectedDayId = this.value;
+        var scheduleSelect = document.getElementById('scheduleSelect');
+        scheduleSelect.options.length = 0; // Clear the schedule dropdown
+
+    @foreach (var schedule in schedules)
+    {
+        @:if (@schedule.GroupNameId == selectedDayId) {
+        @:    var option = document.createElement('option');
+        @:    option.value = '@schedule.Id';
+        @:    option.text = '@schedule.Name';
+        @:    scheduleSelect.add(option);
+        @:}
+    }
+    });
+</script>
+
+@section validation {
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+
+
+<script>
+    function displayAlert(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        Swal.fire({
+            position: "center-center",
+            icon: "success",
+            title: "Student Added To System Successfully",
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            document.querySelector('form').submit(); // Submit the form after the alert
+        });
+    }
+
+    document.querySelector('form').addEventListener('submit', displayAlert);
+</script>

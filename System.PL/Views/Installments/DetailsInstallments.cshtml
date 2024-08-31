@@ -1,0 +1,48 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "DetailsInstallments";
+}
+
+
+
+
+
+
+<div class="container">
+    <h1> <span>Name : </span> @Model.Name</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2> Day : </> @Model.Schedule.GroupName.DayName</h2>
+            <h3><span>Time : </span> @Model.Schedule.Name</h3>
+            <h3><span>Phone : </span> @Model.Phone</h3>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Installments Records</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Payed</th>
+                        <th>Methods</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Installments)
+                    {
+                        <tr>
+                            <td>@item.PaymentDate</td>
+                            <td>@item.Amount </td>
+                            <td>@item.Method </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

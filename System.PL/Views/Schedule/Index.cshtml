@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Schedule>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a asp-controller="Schedule" asp-action="Create" class="btn btn-primary mb-4">Create New Schedule</a>
+
+@if (Model.Count() > 0)
+{
+    <div class="container">
+        @foreach (var groupedByDay in Model.GroupBy(s => s.GroupName.DayName))
+        {
+            <h3>@groupedByDay.Key</h3>
+            @foreach (var groupedByTime in groupedByDay.GroupBy(s => s.Name))
+            {
+                <table class="table table-striped table-hover text-center" style="padding-left: 150px;">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Students</th>
+                            <th>Details</th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var schedule in groupedByTime)
+                        {
+                            <tr>
+                                <td>@schedule.Name</td>
+                                <td>
+                                    <ul>
+                                        @foreach (var student in schedule.Students)
+                                        { 
+                                            <li> <a asp-controller="Student" asp-action="Index"> @student.Name </a> <hr />  </li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@schedule.Id" class="btn btn-warning">Group  Details</a>
+                                </td>
+                              
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <h5>No Schedules Available</h5>
+    </div>
+}
+
+
+
+
+
+
+
+

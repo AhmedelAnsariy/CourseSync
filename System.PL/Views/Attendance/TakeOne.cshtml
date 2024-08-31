@@ -1,0 +1,35 @@
+﻿@model Attendance
+
+
+@{
+    ViewData["Title"] = "TakeOne";
+}
+
+
+<h1>@Model.Student?.Name</h1>
+<h1>@Model.Student?.Schedule?.GroupName?.DayName</h1>
+<h1>@Model.Student?.Schedule?.Name</h1>
+
+<form asp-action="TakeOne">
+
+    <div class="form-group">
+        <label asp-for="IsComed" class="col-form-label"></label>
+        <input asp-for="IsComed" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Date" class="col-form-label"></label>
+        <input asp-for="Date" class="form-control" value="@Model.Date.ToString("yyyy-MM-ddTHH:mm:ss")" />
+    </div>
+
+    
+    <input type="hidden" asp-for="@Model.StudentId"/>
+  
+
+
+    <input type="submit" value="Take Attendance" class="btn btn-primary mt-4" />
+</form>
+
+
+
+<a asp-action="DetailsAttendance" asp-route-id="@Model.Student.Id" class="btn btn-info mt-5">  Details Number Of Comings </a>

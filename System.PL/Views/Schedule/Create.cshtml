@@ -1,0 +1,63 @@
+﻿@model Schedule
+@{
+    ViewData["Title"] = "Create";
+
+    var DayNames = new SelectList(ViewData["GroupNames"] as IEnumerable<GroupName>, "Id", "DayName");
+}
+
+<h1>Create New  Schedule :</h1>
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control" placeholder="9-11 or 12-2" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+
+
+@*     <div class="form-group">
+        <label asp-for="FamousStudent" class="col-form-label"></label>
+        <input asp-for="FamousStudent" class="form-control" placeholder="Ahmed Mohamed" />
+        <span asp-validation-for="FamousStudent" class="text-danger"></span>
+    </div> *@
+
+
+
+
+
+
+
+    <div class="form-group">
+        <label asp-for="GroupName" class="col-form-label"></label>
+        <select asp-for="GroupNameId" class="form-control" asp-items="@DayNames">
+
+            <option value="@null"> -- Select Day </option>
+
+        </select>
+        <span asp-validation-for="GroupNameId" class="text-danger"></span>
+
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-primary mt-4" />
+
+
+</form>
+
+
+
+@section validation {
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

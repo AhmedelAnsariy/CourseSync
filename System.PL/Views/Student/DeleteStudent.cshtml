@@ -1,0 +1,76 @@
+﻿@model Student
+@{
+    ViewData["Title"] = "DeleteStudent";
+}
+
+<h1>Delete Student</h1>
+
+<div class="form-group">
+    <label class="col-form-label">Day</label>
+    <input asp-for="Schedule.GroupName.DayName" readonly class="form-control" />
+</div>
+
+<div class="form-group">
+    <label class="col-form-label">Time</label>
+    <input asp-for="Schedule.Name" readonly class="form-control" />
+</div>
+
+
+<form asp-action="DeleteStudent" id="deleteStudentForm">
+    <div class="form-group">
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" readonly class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone" class="col-form-label"></label>
+        <input asp-for="Phone" readonly class="form-control" />
+    </div>
+
+    <!-- Hidden field to pass the student ID -->
+    <input type="hidden" asp-for="Id" />
+
+    <input type="submit" class="btn btn-danger px-4" onclick="displayAlerts(event)" value="Delete User From System" />
+</form>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function displayAlerts(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                        timer: 2000,
+                        showConfirmButton: false,
+                        willClose: () => {
+                            window.location.href = '@Url.Action("Index", "YourControllerName")';
+                        }
+                    });
+                    setTimeout(() => {
+                        document.getElementById('deleteStudentForm').submit();
+                    }, 1500);
+                }
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+

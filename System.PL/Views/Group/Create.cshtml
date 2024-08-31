@@ -1,0 +1,32 @@
+﻿@model GroupName
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New Day : </h1>
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<form asp-action="Create">
+
+    <span asp-validation-for="DayName" class="text-danger"></span>
+    <input asp-for="DayName" class="form-control mt-3 fs-1" placeholder="New Day" />
+    <input type="submit" class="btn btn-info mt-4" value="Create" />
+
+
+</form>
+
+
+
+@section validation{
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

@@ -1,0 +1,43 @@
+﻿@model Schedule
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+
+<div class="form-group">
+    <label asp-for="Name" class="col-form-label"></label>
+    <input readonly asp-for="Name" class="form-control" />
+</div>
+
+
+<div class="form-group">
+    <label asp-for="FamousStudent" class="col-form-label"></label>
+    <input readonly asp-for="FamousStudent" class="form-control" />
+</div>
+
+
+
+
+
+
+<div class="form-group">
+    <label asp-for="GroupName" class="col-form-label"></label>
+    <input readonly asp-for="GroupName.DayName" class="form-control" />
+</div>
+
+
+
+<div class="form-group">
+    <label asp-for="Students" class="col-form-label"></label>
+    @foreach (var student in Model.Students)
+    {
+        <input readonly asp-for="@student.Name" class="form-control" />
+    }
+</div>
+
+
+
+
+
